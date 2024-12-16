@@ -39,8 +39,20 @@ Here it is seen that the majority of the ratings are between 3 and 5, having the
 
 **2. Text Preprocessing**
 
-In order to prepare the data so it can be processed by the regression models, we perform a basic text preprocessing composed by lemmatization, remove special characters, extra white-space, converting to lowercase and tokenizing.
+In order to prepare the text data so it can be processed by the regression models it has to go through a multi stage processing composed by tokenization, homogeneization, cleaning and voectorization. In this second stage we perform the first three stages of the processing to keep the text variables ready to be transformed to numerical. 
+At first the phrases are divided into tokens (words). Then starts the homogeneization, where all the verbs are lemmatized (conjugated verbs are changed to the basis) and everything is in lowercase. Finally the cleaning is done, here special characters, extra white spaces, stop words and other meaningless elements are removed.
 
 **3. Vector Representation**
 
-The previous section was
+After the text preprocessing, so the machine learning models can work with the information in text variables, these variables are transformed into word vectors. This means, they will have a numerical representation where their value is related to the meaning they have.
+For this type of transformation we are asked to use three different methods:
+
+- TF-IDF:
+- Word2Vec:
+- BERT:
+
+
+
+
+
+
