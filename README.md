@@ -65,3 +65,187 @@ For this type of transformation we are asked to use three different methods:
 
 
 
+
+
+
+
+
+
+
+
+
+
+# Recipe Rating Prediction Project
+
+## Introduction
+This project implements a machine learning solution for predicting recipe ratings based on textual and numerical features. It utilizes various NLP techniques and machine learning models to analyze recipe data from epicurious.com and predict user ratings.
+
+## Authors
+- Iker Aldasoro
+- Jon Lejardi
+
+## Project Structure
+```
+recipe_project/
+├── __init__.py
+├── auxiliar.py
+├── processing.py
+├── vectorization.py
+├── visualization.py
+└── main.py
+```
+
+## Features
+- Text preprocessing and homogenization
+- Multiple vector representation techniques:
+  - TF-IDF
+  - Word2Vec
+  - BERT (contextual embeddings)
+- Regression models:
+  - Neural Networks (PyTorch)
+  - Linear Regression
+  - Random Forest
+- Cross-validation evaluation
+- Comprehensive visualization tools
+
+## Dependencies
+- PyTorch
+- Transformers (Hugging Face)
+- NLTK
+- Pandas
+- NumPy
+- Scikit-learn
+- Matplotlib
+- Seaborn
+- Gensim
+
+## Installation
+1. Clone the repository
+2. Install required packages:
+```bash
+pip install torch transformers nltk pandas numpy scikit-learn matplotlib seaborn gensim
+```
+3. Download required NLTK data:
+```python
+import nltk
+nltk.download("punkt")
+nltk.download("stopwords")
+nltk.download("punkt_tab")
+nltk.download("wordnet")
+```
+
+## Module Description
+
+### auxiliar.py
+- Handles CUDA device detection and configuration
+- Provides GPU information and memory statistics
+
+### processing.py
+- Implements text preprocessing pipeline
+- Features:
+  - String conversion and cleaning
+  - NLTK-based text processing
+  - Stopword removal
+  - Lemmatization
+  - Special character removal
+
+### vectorization.py
+- Implements three vectorization methods:
+  - BERT embeddings
+  - TF-IDF vectorization
+  - Word2Vec embeddings
+- Includes neural network implementation and training
+- Implements cross-validation evaluation
+- Provides comprehensive model evaluation metrics and visualizations
+
+### visualization.py
+- Generates various analytical visualizations:
+  - Category-rating relationships
+  - Feature correlations
+  - Rating distributions
+  - Text length analysis
+  - Temporal analysis
+  - Category distribution
+
+## Methodology
+
+### 1. Data Preprocessing
+- Text cleaning and normalization
+- Handling missing values
+- Feature extraction from text data
+- Data type conversion
+
+### 2. Vectorization
+Three different approaches are implemented:
+1. **BERT Vectorization**
+   - Uses pretrained BERT model
+   - Generates contextual embeddings
+   - Handles batching for memory efficiency
+
+2. **TF-IDF Vectorization**
+   - Implements term frequency-inverse document frequency
+   - Uses scikit-learn's TfidfVectorizer
+   - Limited to 1000 features for efficiency
+
+3. **Word2Vec Vectorization**
+   - Implements word embeddings
+   - Uses Gensim's Word2Vec model
+   - Creates document vectors by averaging word vectors
+
+### 3. Model Implementation
+- **Neural Network**
+  - Three-layer architecture with dropout
+  - ReLU activation
+  - Adam optimizer with weight decay
+  - Batch processing
+
+- **Additional Models**
+  - Linear Regression
+  - Random Forest Regressor
+
+### 4. Evaluation
+- Cross-validation with k=5 folds
+- Metrics:
+  - Mean Squared Error (MSE)
+  - R² Score
+  - Training and validation loss curves
+  - Prediction vs actual value plots
+  - Distribution analysis
+
+## Results Visualization
+The project includes comprehensive visualization of:
+- Training metrics over time
+- Model performance comparisons
+- Prediction accuracy
+- Error distribution
+- Feature importance
+- Cross-validation results
+
+## Usage
+Run the main script to execute the complete pipeline:
+```bash
+python main.py
+```
+
+## Project Requirements Met
+1. ✓ Text processing and homogenization
+2. ✓ Vector representation using multiple techniques
+3. ✓ Regression task implementation
+4. ✓ Cross-validation evaluation
+5. ✓ Comprehensive documentation
+6. ✓ Well-structured code organization
+7. ✓ Results analysis and visualization
+
+## Note
+This project is part of the Master in Telecommunication Engineering course. The implementation follows the requirements specified in the project documentation, including both basic requirements and extensions.
+
+
+
+
+
+
+
+
+
+
+
