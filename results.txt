@@ -196,3 +196,15 @@ Fold 2 R² scores:
 Neural Network: 0.1454
 Linear Regression: 0.1281
 Random Forest: 0.2183
+
+Fold 3/5
+Fold 3 R² scores:
+Neural Network: 0.1393
+Linear Regression: 0.1388
+Random Forest: 0.2069
+
+Fold 4/5
+Fold 4 R² scores:
+Neural Network: 0.1459
+Linear Regression: 0.1244
+Random Forest: 0.1959
