@@ -3,6 +3,9 @@
 
 # Recipe Rating Prediction Project
 
+## Resources
+Github Pages: https://ikerald.github.io/final-project-data-processing-JL-IA/
+
 ## Introduction
 This project implements a machine learning solution for predicting recipe ratings based on textual and numerical features. It utilizes various NLP techniques and machine learning models to analyze recipe data from epicurious.com and predict user ratings.
 
