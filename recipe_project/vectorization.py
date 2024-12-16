@@ -7,10 +7,10 @@ Date: 16/12/2024
 
 # vectorization.py
 
-from transformers import AutoTokenizer, AutoModel
+from transformers import AutoTokenizer, AutoModel, AutoModelForSequenceClassification
 from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split, KFold, cross_val_score
-from sklearn.metrics import mean_squared_error, r2_score, make_scorer
+from sklearn.model_selection import train_test_split, KFold
+from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -114,6 +114,54 @@ def Word2Vec_vectorization(df: pandas.core.frame.DataFrame):
     return W2V_vectors
 
 
+def roberta_vectorization(device: torch.device, df: pandas.core.frame.DataFrame):
+    """Creates the BERT vectors needed for the Regression models.
+
+    Args:
+        device (torch.device): Device where the model will be runned.
+        df (pandas.core.frame.DataFrame): Dataframe to be analyzed.
+
+    Returns:
+        numpy.ndarray: Final vectors te be used in the regression models.
+    """
+    batch_size = 32
+
+    # Load tokenizer and model
+    tokenizer = AutoTokenizer.from_pretrained("distilbert-base-uncased")
+    model = AutoModelForSequenceClassification.from_pretrained(
+        "distilbert-base-uncased", num_labels=1
+    )
+    model = model.to(device)
+
+    robert_vectors = []  # Initialize predictions list
+
+    # Process in batches
+    for i in range(0, len(df), batch_size):
+        batch_texts = df["directions_pre"].iloc[i : i + batch_size].tolist()
+        inputs = tokenizer(
+            batch_texts,
+            padding=True,
+            truncation=True,
+            max_length=512,
+            return_tensors="pt",
+        )
+
+        # Move inputs to device
+        inputs = {k: v.to(device) for k, v in inputs.items()}
+
+        with torch.no_grad():
+            outputs = model(**inputs)
+            # Get regression predictions
+            batch_predictions = outputs.logits.squeeze().cpu().numpy()
+            robert_vectors.extend(batch_predictions)
+
+    # Convert to numpy array if needed
+    robert_vectors = np.array(robert_vectors)
+    print(f"Created BERT vectors with shape: {robert_vectors.shape}")
+
+    return robert_vectors.reshape(-1, 1)
+
+
 def NeuralNetwork(vectors, df: pandas.core.frame.DataFrame):
     """Creates the Neural network and visualized the result. Also creates a linear
     regression and random forest model and visualizes it. Includes cross-validation
@@ -131,14 +179,14 @@ def NeuralNetwork(vectors, df: pandas.core.frame.DataFrame):
     print("\n=== Cross-validation Evaluation ===")
     k_folds = 5
     kf = KFold(n_splits=k_folds, shuffle=True, random_state=42)
-    
+
     nn_cv_scores = []
     lr_cv_scores = []
     rf_cv_scores = []
 
     for fold, (train_idx, val_idx) in enumerate(kf.split(features_scaled)):
         print(f"\nFold {fold + 1}/{k_folds}")
-        
+
         # Split data for this fold
         X_train_cv = features_scaled[train_idx]
         X_val_cv = features_scaled[val_idx]
@@ -170,8 +218,8 @@ def NeuralNetwork(vectors, df: pandas.core.frame.DataFrame):
         for epoch in range(100):
             model_cv.train()
             for i in range(0, len(X_train_t_cv), 32):
-                batch_X = X_train_t_cv[i:i + 32]
-                batch_y = y_train_t_cv[i:i + 32]
+                batch_X = X_train_t_cv[i : i + 32]
+                batch_y = y_train_t_cv[i : i + 32]
 
                 outputs = model_cv(batch_X)
                 loss = criterion(outputs, batch_y)
@@ -206,16 +254,22 @@ def NeuralNetwork(vectors, df: pandas.core.frame.DataFrame):
 
     # Print cross-validation results
     print("\nCross-validation Results (mean ± std):")
-    print(f"Neural Network R²: {np.mean(nn_cv_scores):.4f} ± {np.std(nn_cv_scores):.4f}")
-    print(f"Linear Regression R²: {np.mean(lr_cv_scores):.4f} ± {np.std(lr_cv_scores):.4f}")
+    print(
+        f"Neural Network R²: {np.mean(nn_cv_scores):.4f} ± {np.std(nn_cv_scores):.4f}"
+    )
+    print(
+        f"Linear Regression R²: {np.mean(lr_cv_scores):.4f} ± {np.std(lr_cv_scores):.4f}"
+    )
     print(f"Random Forest R²: {np.mean(rf_cv_scores):.4f} ± {np.std(rf_cv_scores):.4f}")
 
     # Visualize cross-validation results
     plt.figure(figsize=(10, 6))
-    plt.boxplot([nn_cv_scores, lr_cv_scores, rf_cv_scores], 
-                labels=['Neural Network', 'Linear Regression', 'Random Forest'])
-    plt.title('Cross-validation R² Scores Across Models')
-    plt.ylabel('R² Score')
+    plt.boxplot(
+        [nn_cv_scores, lr_cv_scores, rf_cv_scores],
+        labels=["Neural Network", "Linear Regression", "Random Forest"],
+    )
+    plt.title("Cross-validation R² Scores Across Models")
+    plt.ylabel("R² Score")
     plt.grid(True)
     plt.show()
 
@@ -262,8 +316,8 @@ def NeuralNetwork(vectors, df: pandas.core.frame.DataFrame):
         num_batches = 0
 
         for i in range(0, len(X_train_t), batch_size):
-            batch_X = X_train_t[i:i + batch_size]
-            batch_y = y_train_t[i:i + batch_size]
+            batch_X = X_train_t[i : i + batch_size]
+            batch_y = y_train_t[i : i + batch_size]
 
             outputs = model_ML(batch_X)
             loss = criterion(outputs, batch_y)
@@ -336,15 +390,25 @@ def NeuralNetwork(vectors, df: pandas.core.frame.DataFrame):
 
     # Predictions vs Actuals
     ax3.scatter(y_test_t.numpy(), test_predictions.numpy(), alpha=0.5)
-    ax3.plot([y_test_t.min(), y_test_t.max()], [y_test_t.min(), y_test_t.max()], "r--", lw=2)
+    ax3.plot(
+        [y_test_t.min(), y_test_t.max()], [y_test_t.min(), y_test_t.max()], "r--", lw=2
+    )
     ax3.set_title("Predictions vs Actual Values")
     ax3.set_xlabel("Actual Values")
     ax3.set_ylabel("Predicted Values")
     ax3.grid(True)
 
     # Distribution Plot
-    ax4.hist(y_test_t.numpy().flatten(), bins=30, alpha=0.5, label="Actual", density=True)
-    ax4.hist(test_predictions.numpy().flatten(), bins=30, alpha=0.5, label="Predicted", density=True)
+    ax4.hist(
+        y_test_t.numpy().flatten(), bins=30, alpha=0.5, label="Actual", density=True
+    )
+    ax4.hist(
+        test_predictions.numpy().flatten(),
+        bins=30,
+        alpha=0.5,
+        label="Predicted",
+        density=True,
+    )
     ax4.set_title("Distribution of Actual vs Predicted Values")
     ax4.set_xlabel("Values")
     ax4.set_ylabel("Density")
@@ -391,6 +455,7 @@ def NeuralNetwork(vectors, df: pandas.core.frame.DataFrame):
     plt.ylabel("Predicted Values")
     plt.grid(True)
     plt.show()
+
 
 # def NeuralNetwork(vectors, df: pandas.core.frame.DataFrame):
 #     """Creates the Neural network and visualized the result. Also creates a linear
@@ -600,17 +665,17 @@ def NeuralNetwork(vectors, df: pandas.core.frame.DataFrame):
 #     plt.grid(True)
 #     plt.show()
 
-    # Validation
-    # K-Fold Cross-Validation
-    # k = 5
-    # kf = KFold(n_splits=k, shuffle=True, random_state=42)
+# Validation
+# K-Fold Cross-Validation
+# k = 5
+# kf = KFold(n_splits=k, shuffle=True, random_state=42)
 
-    # Scoring Metric (e.g., RMSE)
-    # scoring = make_scorer(mean_squared_error, greater_is_better=False)  # RMSE will be negative
+# Scoring Metric (e.g., RMSE)
+# scoring = make_scorer(mean_squared_error, greater_is_better=False)  # RMSE will be negative
 
-    # Perform Cross-Validation
-    # cv_scores = cross_val_score(model_ML, features_scaled, targets, cv=kf, scoring=scoring)
+# Perform Cross-Validation
+# cv_scores = cross_val_score(model_ML, features_scaled, targets, cv=kf, scoring=scoring)
 
-    # Display Results
-    # print("Cross-Validation RMSE scores:", np.sqrt(-cv_scores))
-    # print("Average RMSE:", np.mean(np.sqrt(-cv_scores)))
+# Display Results
+# print("Cross-Validation RMSE scores:", np.sqrt(-cv_scores))
+# print("Average RMSE:", np.mean(np.sqrt(-cv_scores)))

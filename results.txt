@@ -183,7 +183,7 @@ Created Word2Vec vectors with shape: (20130, 100)
 5. Neural Networks and Random Forest
 Scaled features shape: (20130, 768)
 
-=== Cross-validation Evaluation ===
+=== Cross-validation Evaluation BERT ===
 
 Fold 1/5
 Fold 1 R² scores:
@@ -208,3 +208,213 @@ Fold 4 R² scores:
 Neural Network: 0.1459
 Linear Regression: 0.1244
 Random Forest: 0.1959
+
+Fold 5/5
+Fold 5 R² scores:
+Neural Network: 0.1176
+Linear Regression: 0.0918
+Random Forest: 0.1756
+
+Cross-validation Results (mean ± std):
+Neural Network R²: 0.1365 ± 0.0103
+Linear Regression R²: 0.1172 ± 0.0172
+Random Forest R²: 0.1982 ± 0.0142
+
+=== Detailed Model Training and Visualization BERT ===
+Epoch [5/100], Loss: 1.7533, Train R²: 0.2005, Test R²: 0.0780
+Epoch [10/100], Loss: 1.6581, Train R²: 0.1965, Test R²: 0.0812
+Epoch [15/100], Loss: 1.6129, Train R²: 0.1997, Test R²: 0.0965
+Epoch [20/100], Loss: 1.5749, Train R²: 0.1984, Test R²: 0.0915
+Epoch [25/100], Loss: 1.5473, Train R²: 0.2099, Test R²: 0.1090
+Epoch [30/100], Loss: 1.5048, Train R²: 0.2143, Test R²: 0.1159
+Epoch [35/100], Loss: 1.5025, Train R²: 0.2251, Test R²: 0.1232
+Epoch [40/100], Loss: 1.4840, Train R²: 0.2408, Test R²: 0.1351
+Epoch [45/100], Loss: 1.4663, Train R²: 0.2559, Test R²: 0.1306
+Epoch [50/100], Loss: 1.4711, Train R²: 0.2324, Test R²: 0.1321
+Epoch [55/100], Loss: 1.4492, Train R²: 0.2455, Test R²: 0.1169
+Epoch [60/100], Loss: 1.4455, Train R²: 0.2644, Test R²: 0.1373
+Epoch [65/100], Loss: 1.4447, Train R²: 0.2807, Test R²: 0.1237
+Epoch [70/100], Loss: 1.4235, Train R²: 0.2738, Test R²: 0.1364
+Epoch [75/100], Loss: 1.4147, Train R²: 0.2923, Test R²: 0.1247
+Epoch [80/100], Loss: 1.4034, Train R²: 0.2808, Test R²: 0.1188
+Epoch [85/100], Loss: 1.4105, Train R²: 0.2838, Test R²: 0.1213
+Epoch [90/100], Loss: 1.4115, Train R²: 0.2929, Test R²: 0.1293
+Epoch [95/100], Loss: 1.3920, Train R²: 0.2682, Test R²: 0.1140
+Epoch [100/100], Loss: 1.4116, Train R²: 0.2858, Test R²: 0.1321
+
+Final Training Set Metrics:
+MSE: 1.2859
+R²: 0.2858
+
+Final Test Set Metrics:
+MSE: 1.5662
+R²: 0.1321
+
+Linear Regression R² - Train: 0.2187, Test: 0.1072
+
+Random Forest Final Metrics:
+Training Set:
+MSE: 0.2393
+R²: 0.8671
+
+Test Set:
+MSE: 1.4565
+R²: 0.1928
+Scaled features shape: (20130, 1000)
+
+=== Cross-validation Evaluation TF-IDF ===
+
+Fold 1/5
+Fold 1 R² scores:
+Neural Network: 0.1459
+Linear Regression: -69.7203
+Random Forest: 0.2010
+
+Fold 2/5
+Fold 2 R² scores:
+Neural Network: 0.1472
+Linear Regression: 0.1361
+Random Forest: 0.2224
+
+Fold 3/5
+Fold 3 R² scores:
+Neural Network: 0.1491
+Linear Regression: 0.1381
+Random Forest: 0.2251
+
+Fold 4/5
+Fold 4 R² scores:
+Neural Network: 0.1361
+Linear Regression: 0.1514
+Random Forest: 0.2174
+
+Fold 5/5
+Fold 5 R² scores:
+Neural Network: 0.1629
+Linear Regression: 0.1203
+Random Forest: 0.2071
+
+Cross-validation Results (mean ± std):
+Neural Network R²: 0.1483 ± 0.0086
+Linear Regression R²: -13.8349 ± 27.9427
+Random Forest R²: 0.2146 ± 0.0091
+
+=== Detailed Model Training and Visualization TF-IDF ===
+Epoch [5/100], Loss: 1.4002, Train R²: 0.4061, Test R²: 0.0742
+Epoch [10/100], Loss: 1.1771, Train R²: 0.5175, Test R²: 0.0973
+Epoch [15/100], Loss: 1.0293, Train R²: 0.5703, Test R²: 0.0890
+Epoch [20/100], Loss: 0.9188, Train R²: 0.6160, Test R²: 0.0892
+Epoch [25/100], Loss: 0.8838, Train R²: 0.6376, Test R²: 0.1031
+Epoch [30/100], Loss: 0.8470, Train R²: 0.6519, Test R²: 0.1249
+Epoch [35/100], Loss: 0.8318, Train R²: 0.6354, Test R²: 0.1128
+Epoch [40/100], Loss: 0.8057, Train R²: 0.6526, Test R²: 0.1089
+Epoch [45/100], Loss: 0.7855, Train R²: 0.6640, Test R²: 0.1164
+Epoch [50/100], Loss: 0.8023, Train R²: 0.6640, Test R²: 0.1117
+Epoch [55/100], Loss: 0.7675, Train R²: 0.6839, Test R²: 0.0908
+Epoch [60/100], Loss: 0.7639, Train R²: 0.6919, Test R²: 0.0923
+Epoch [65/100], Loss: 0.7618, Train R²: 0.6881, Test R²: 0.0997
+Epoch [70/100], Loss: 0.7624, Train R²: 0.6570, Test R²: 0.0822
+Epoch [75/100], Loss: 0.7621, Train R²: 0.6764, Test R²: 0.1179
+Epoch [80/100], Loss: 0.7355, Train R²: 0.6884, Test R²: 0.0832
+Epoch [85/100], Loss: 0.7755, Train R²: 0.6880, Test R²: 0.1150
+Epoch [90/100], Loss: 0.7614, Train R²: 0.6900, Test R²: 0.1170
+Epoch [95/100], Loss: 0.7563, Train R²: 0.6882, Test R²: 0.1163
+Epoch [100/100], Loss: 0.7678, Train R²: 0.7018, Test R²: 0.0775
+
+Final Training Set Metrics:
+MSE: 0.5369
+R²: 0.7018
+
+Final Test Set Metrics:
+MSE: 1.6647
+R²: 0.0775
+
+Linear Regression R² - Train: 0.2530, Test: 0.1098
+
+Random Forest Final Metrics:
+Training Set:
+MSE: 0.2353
+R²: 0.8693
+
+Test Set:
+MSE: 1.4582
+R²: 0.1919
+Scaled features shape: (20130, 100)
+
+=== Cross-validation Evaluation Word2Vec ===
+
+Fold 1/5
+Fold 1 R² scores:
+Neural Network: 0.1283
+Linear Regression: 0.1162
+Random Forest: 0.1859
+
+Fold 2/5
+Fold 2 R² scores:
+Neural Network: 0.1390
+Linear Regression: 0.1280
+Random Forest: 0.2147
+
+Fold 3/5
+Fold 3 R² scores:
+Neural Network: 0.1543
+Linear Regression: 0.1300
+Random Forest: 0.2039
+
+Fold 4/5
+Fold 4 R² scores:
+Neural Network: 0.1570
+Linear Regression: 0.1414
+Random Forest: 0.2023
+
+Fold 5/5
+Fold 5 R² scores:
+Neural Network: 0.1200
+Linear Regression: 0.1025
+Random Forest: 0.1763
+
+Cross-validation Results (mean ± std):
+Neural Network R²: 0.1397 ± 0.0144
+Linear Regression R²: 0.1236 ± 0.0132
+Random Forest R²: 0.1966 ± 0.0137
+
+=== Detailed Model Training and Visualization Word2Vec ===
+Epoch [5/100], Loss: 1.8098, Train R²: 0.1222, Test R²: 0.0874
+Epoch [10/100], Loss: 1.6963, Train R²: 0.1476, Test R²: 0.1160
+Epoch [15/100], Loss: 1.6328, Train R²: 0.1571, Test R²: 0.1219
+Epoch [20/100], Loss: 1.5959, Train R²: 0.1635, Test R²: 0.1257
+Epoch [25/100], Loss: 1.5692, Train R²: 0.1731, Test R²: 0.1314
+Epoch [30/100], Loss: 1.5575, Train R²: 0.1748, Test R²: 0.1309
+Epoch [35/100], Loss: 1.5502, Train R²: 0.1785, Test R²: 0.1270
+Epoch [40/100], Loss: 1.5426, Train R²: 0.1810, Test R²: 0.1272
+Epoch [45/100], Loss: 1.5296, Train R²: 0.1865, Test R²: 0.1295
+Epoch [50/100], Loss: 1.5227, Train R²: 0.1878, Test R²: 0.1268
+Epoch [55/100], Loss: 1.5154, Train R²: 0.1931, Test R²: 0.1318
+Epoch [60/100], Loss: 1.5177, Train R²: 0.1986, Test R²: 0.1368
+Epoch [65/100], Loss: 1.5163, Train R²: 0.1953, Test R²: 0.1284
+Epoch [70/100], Loss: 1.5017, Train R²: 0.1988, Test R²: 0.1348
+Epoch [75/100], Loss: 1.5103, Train R²: 0.1995, Test R²: 0.1327
+Epoch [80/100], Loss: 1.4970, Train R²: 0.2024, Test R²: 0.1323
+Epoch [85/100], Loss: 1.4930, Train R²: 0.2143, Test R²: 0.1349
+Epoch [90/100], Loss: 1.5025, Train R²: 0.2121, Test R²: 0.1402
+Epoch [95/100], Loss: 1.4928, Train R²: 0.2076, Test R²: 0.1329
+Epoch [100/100], Loss: 1.4922, Train R²: 0.2134, Test R²: 0.1375
+
+Final Training Set Metrics:
+MSE: 1.4163
+R²: 0.2134
+
+Final Test Set Metrics:
+MSE: 1.5564
+R²: 0.1375
+
+Linear Regression R² - Train: 0.1400, Test: 0.1162
+
+Random Forest Final Metrics:
+Training Set:
+MSE: 0.2417
+R²: 0.8657
+
+Test Set:
+MSE: 1.4962
+R²: 0.1709

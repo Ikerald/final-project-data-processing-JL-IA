@@ -37,7 +37,7 @@ def main():
 
     print(" ")
     print("2. Analyzing dataframe")
-    # recipe_project.visualization.visualize(df)
+    recipe_project.visualization.visualize(df)
 
     print(" ")
     print("3. Applying NLT Pipeline")
@@ -68,6 +68,11 @@ def main():
     recipe_project.vectorization.NeuralNetwork(vectors_bert, df)
     recipe_project.vectorization.NeuralNetwork(vectors_TF, df)
     recipe_project.vectorization.NeuralNetwork(vectors_W2V, df)
+
+    print("")
+    print("6. Hugging Face model - RoBERTa")
+    vectors_roberta = recipe_project.vectorization.roberta_vectorization(device, df)
+    recipe_project.vectorization.NeuralNetwork(vectors_roberta, df)
 
 
 if __name__ == "__main__":
