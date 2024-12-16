@@ -235,6 +235,209 @@ python main.py
 5. ✓ Comprehensive documentation
 6. ✓ Well-structured code organization
 7. ✓ Results analysis and visualization
+   
+
+# Recipe Rating Prediction Project - Technical Documentation
+
+## Technical Overview
+This project implements a machine learning pipeline to predict recipe ratings using a combination of NLP techniques and regression models. The system processes recipe data from epicurious.com, which includes textual descriptions, ingredients, and nutritional information.
+
+## Detailed Code Structure Analysis
+
+### 1. Data Pipeline (`main.py`)
+```python
+def main():
+    # NLTK Setup
+    nltk.download("punkt")
+    nltk.download("stopwords")
+    nltk.download("punkt_tab")
+    nltk.download("wordnet")
+
+    # Data Loading
+    df = pd.read_json("./data/full_format_recipes.json")
+```
+The pipeline begins by downloading required NLTK resources and loading the JSON dataset. The data contains 20,130 recipes with multiple features including directions, categories, descriptions, and ratings.
+
+### 2. CUDA Configuration (`auxiliar.py`)
+```python
+def get_cuda():
+    if torch.cuda.is_available():
+        device = torch.device("cuda")
+        # GPU information logging
+        print(f"GPU Device Name: {torch.cuda.get_device_name(0)}")
+        print(f"Number of GPUs: {torch.cuda.device_count()}")
+```
+The auxiliary module handles GPU detection and configuration, providing detailed hardware information and memory statistics for optimization.
+
+### 3. Text Processing Pipeline (`processing.py`)
+
+#### Data Preprocessing
+```python
+def preprocessing(df):
+    df["directions_pre"] = df["directions"].apply(
+        lambda x: " ".join(x) if isinstance(x, list) else str(x)
+    )
+    df["rating_pre"] = pd.to_numeric(df["rating"], errors="coerce")
+    df["rating_pre"] = df["rating_pre"].fillna(df["rating_pre"].mean())
+```
+Key preprocessing steps:
+- Converts list-type data to strings
+- Handles missing values in ratings
+- Normalizes text data formats
+
+#### NLTK Processing
+```python
+def NTLK_clean(text: str):
+    stop_words = set(stopwords.words("english"))
+    lemmatizer = WordNetLemmatizer()
+    
+    # Processing steps
+    text = text.lower()
+    text = re.sub(r"[^a-zA-Zs]", "", text)
+    text = lemmatizer.lemmatize(text)
+    tokens = word_tokenize(text)
+    tokens = [token for token in tokens if token not in stop_words]
+```
+The NLP pipeline includes:
+- Lowercasing
+- Special character removal
+- Lemmatization
+- Tokenization
+- Stopword removal
+
+### 4. Vectorization Methods (`vectorization.py`)
+
+#### BERT Vectorization
+```python
+def bert_vectorization(device: torch.device, df: pandas.DataFrame):
+    tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
+    model = AutoModel.from_pretrained("bert-base-uncased")
+    
+    # Batch processing for memory efficiency
+    batch_size = 32
+    for i in range(0, len(df), batch_size):
+        batch_texts = df["directions_pre"].iloc[i : i + batch_size].tolist()
+        inputs = tokenizer(batch_texts, padding=True, truncation=True, max_length=512)
+```
+Features:
+- Uses BERT base uncased model
+- Implements batch processing
+- Handles memory efficiently
+- Maximum sequence length of 512 tokens
+
+#### TF-IDF Vectorization
+```python
+def TF_vectorization(df: pandas.DataFrame):
+    tfidf = TfidfVectorizer(max_features=1000)
+    tfidf_vectors = tfidf.fit_transform(df["directions_post"])
+```
+Characteristics:
+- Limited to 1000 features for dimensionality control
+- Sparse matrix representation
+- Based on preprocessed text
+
+#### Word2Vec Vectorization
+```python
+def Word2Vec_vectorization(df: pandas.DataFrame):
+    sentences = [text.split() for text in df["directions_post"]]
+    w2v_model = Word2Vec(sentences, vector_size=100, window=5, min_count=1)
+```
+Configuration:
+- 100-dimensional vectors
+- Context window of 5 words
+- Minimum word count of 1
+- Document vectors created by averaging word vectors
+
+### 5. Neural Network Implementation
+
+#### Architecture
+```python
+model_ML = nn.Sequential(
+    nn.Linear(input_size, 128),
+    nn.ReLU(),
+    nn.Dropout(0.3),
+    nn.Linear(128, 64),
+    nn.ReLU(),
+    nn.Dropout(0.3),
+    nn.Linear(64, 1),
+)
+```
+Network features:
+- Three-layer architecture
+- ReLU activation functions
+- Dropout layers (0.3 rate) for regularization
+- Output layer for regression
+
+#### Training Configuration
+```python
+criterion = nn.MSELoss()
+optimizer = optim.Adam(model_ML.parameters(), lr=0.001, weight_decay=0.01)
+```
+Training parameters:
+- Mean Squared Error loss
+- Adam optimizer
+- Learning rate: 0.001
+- Weight decay: 0.01
+- Batch size: 32
+- Epochs: 100
+
+### 6. Cross-Validation and Evaluation
+```python
+k_folds = 5
+kf = KFold(n_splits=k_folds, shuffle=True, random_state=42)
+
+for fold, (train_idx, val_idx) in enumerate(kf.split(features_scaled)):
+    # Training and evaluation for each fold
+```
+Evaluation metrics:
+- 5-fold cross-validation
+- MSE (Mean Squared Error)
+- R² Score
+- Training/validation loss curves
+- Prediction vs actual plots
+- Distribution analysis
+
+### 7. Visualization Component (`visualization.py`)
+```python
+def visualize(df: pd.DataFrame):
+    # Category analysis
+    category_counts = df["categories"].explode().value_counts()[:15]
+    
+    # Correlation analysis
+    numerical_cols = ["rating", "fat", "protein", "calories", "sodium"]
+    sns.heatmap(df[numerical_cols].corr(), annot=True)
+```
+Visualization features:
+- Category-rating relationships
+- Feature correlations
+- Rating distributions
+- Text length analysis
+- Temporal trends
+- Category distributions
+
+## Performance Optimization
+
+### Memory Management
+- Batch processing for BERT vectorization
+- TF-IDF feature limitation
+- Float32 conversion for reduced memory footprint
+```python
+vectors_TF = vectors_TF.astype(np.float32)
+```
+
+### Computational Efficiency
+- GPU acceleration when available
+- Efficient text preprocessing pipeline
+- Batch processing in neural network training
+- Optimized cross-validation implementation
+
+## Extension Possibilities
+1. Summarization implementation
+2. Recipe generation using transformers
+3. Advanced NLP techniques integration
+4. Alternative embedding approaches
+5. Graph-based analysis implementation
+
 
 
 
