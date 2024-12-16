@@ -236,8 +236,6 @@ python main.py
 6. ✓ Well-structured code organization
 7. ✓ Results analysis and visualization
 
-## Note
-This project is part of the Master in Telecommunication Engineering course. The implementation follows the requirements specified in the project documentation, including both basic requirements and extensions.
 
 
 
