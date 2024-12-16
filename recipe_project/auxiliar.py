@@ -1,4 +1,12 @@
+"""
+Authors: Iker Aldasoro
+         Jon Lejardi
+
+Date: 16/12/2024
+"""
+
 import torch
+
 
 def get_cuda():
     """Gets the available device
@@ -22,5 +30,5 @@ def get_cuda():
     else:
         device = torch.device("cpu")
         print("\nGPU not available, using CPU instead")
-    
+
     return device

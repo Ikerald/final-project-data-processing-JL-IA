@@ -4,13 +4,13 @@ Authors: Iker Aldasoro
 
 Date: 16/12/2024
 """
+
 import re
 import pandas as pd
 
 from nltk import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
-
 
 
 def preprocessing(df):
@@ -25,13 +25,13 @@ def preprocessing(df):
 
     # Handle directions (list of strings) by joining them
     df["directions_pre"] = df["directions"].apply(
-    lambda x: " ".join(x) if isinstance(x, list) else str(x)
+        lambda x: " ".join(x) if isinstance(x, list) else str(x)
     )
     df["categories_pre"] = df["categories"].apply(
-    lambda x: " ".join(x) if isinstance(x, list) else str(x)
+        lambda x: " ".join(x) if isinstance(x, list) else str(x)
     )
     df["ingredients_pre"] = df["ingredients"].apply(
-    lambda x: " ".join(x) if isinstance(x, list) else str(x)
+        lambda x: " ".join(x) if isinstance(x, list) else str(x)
     )
     df["rating_pre"] = pd.to_numeric(df["rating"], errors="coerce")
     df["rating_pre"] = df["rating_pre"].fillna(df["rating_pre"].mean())
@@ -39,14 +39,15 @@ def preprocessing(df):
 
     return df
 
+
 def NTLK_clean(text):
     """NLT pipeline using NTLK
 
     Args:
-        text (_type_): _description_
+        text (category): Category of the dataset to apply the NLP
 
     Returns:
-        _type_: Tokenized work
+        _type_: Tokenized word
     """
     stop_words = set(stopwords.words("english"))
     if not isinstance(text, str):
@@ -68,7 +69,7 @@ def NTLK_clean(text):
         # Remove extra whitespace
         text = lemmatizer.lemmatize(text)
 
-        # Basic word tokenization (split by space)
+        # Basic word tokenization
         tokens = word_tokenize(text)
 
         # Remove stopwords
