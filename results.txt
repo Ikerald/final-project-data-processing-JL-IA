@@ -1,0 +1,198 @@
+& "d:/01_MASTER/1 COURSE/1 semester/DATA PROCESSING/final-project-data-processing-JL-IA/.venv/Scripts/python.exe" "d:/01_MASTER/1 COURSE/1 semester/DATA PROCESSING/final-project-data-processing-JL-IA/main.py"
+[nltk_data] Downloading package punkt to
+[nltk_data]     C:\Users\Iker_Al\AppData\Roaming\nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+[nltk_data] Downloading package stopwords to
+[nltk_data]     C:\Users\Iker_Al\AppData\Roaming\nltk_data...
+[nltk_data]   Package stopwords is already up-to-date!
+[nltk_data] Downloading package punkt_tab to
+[nltk_data]     C:\Users\Iker_Al\AppData\Roaming\nltk_data...
+[nltk_data]   Package punkt_tab is already up-to-date!
+[nltk_data] Downloading package wordnet to
+[nltk_data]     C:\Users\Iker_Al\AppData\Roaming\nltk_data...
+[nltk_data]   Package wordnet is already up-to-date!
+Checking cuda device
+
+GPU Information:
+- GPU Available: Yes
+- GPU Device Name: NVIDIA GeForce GTX 1060
+- Number of GPUs: 1
+- CUDA Version: 11.8
+- GPU Memory Allocated: 0.00 MB
+- GPU Memory Cached: 0.00 MB
+ 
+1. Preprocessing of the variable
+ 
+2. Analyzing dataframe
+ 
+Checking cuda device
+
+GPU Information:
+- GPU Available: Yes
+- GPU Device Name: NVIDIA GeForce GTX 1060
+- Number of GPUs: 1
+- CUDA Version: 11.8
+- GPU Memory Allocated: 0.00 MB
+- GPU Memory Cached: 0.00 MB
+
+1. Preprocessing of the variable
+
+2. Analyzing dataframe
+
+GPU Information:
+- GPU Available: Yes
+- GPU Device Name: NVIDIA GeForce GTX 1060
+- Number of GPUs: 1
+- CUDA Version: 11.8
+- GPU Memory Allocated: 0.00 MB
+- GPU Memory Cached: 0.00 MB
+
+1. Preprocessing of the variable
+
+2. Analyzing dataframe
+
+- GPU Device Name: NVIDIA GeForce GTX 1060
+- Number of GPUs: 1
+- CUDA Version: 11.8
+- GPU Memory Allocated: 0.00 MB
+- GPU Memory Cached: 0.00 MB
+
+1. Preprocessing of the variable
+
+2. Analyzing dataframe
+
+- CUDA Version: 11.8
+- GPU Memory Allocated: 0.00 MB
+- GPU Memory Cached: 0.00 MB
+
+1. Preprocessing of the variable
+
+2. Analyzing dataframe
+
+
+1. Preprocessing of the variable
+
+2. Analyzing dataframe
+
+
+2. Analyzing dataframe
+
+
+3. Applying NLT Pipeline
+0    1. Place the stock, lentils, celery, carrot, t...
+1    Combine first 9 ingredients in heavy medium sa...
+2    In a large heavy saucepan cook diced fennel an...
+3    Heat oil in heavy large skillet over medium-hi...
+4    Preheat oven to 350°F. Lightly grease 8x8x2-in...
+Name: directions_pre, dtype: object
+
+0    place stock lentils celery carrot thyme salt m...
+1    combine first ingredients heavy medium saucepa...
+2    large heavy saucepan cook diced fennel onion b...
+3    heat oil heavy large skillet mediumhigh heat a...
+4    preheat oven f lightly grease xxinch glass bak...
+Name: directions_post, dtype: object
+
+4. Vectorizing
+2024-12-16 20:16:13.949792: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2024-12-16 20:16:20.325093: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+Created BERT vectors:
+[[-0.64685816 -0.2911992   0.41789517 ...  0.08360092  0.2738966
+   0.7042421 ]
+ [-0.7095348  -0.72999567  0.41095787 ... -0.0763047   0.036318
+   0.6617886 ]
+ [-0.87528026 -0.5878012   0.1760604  ... -0.08389314 -0.06296791
+   0.5007634 ]
+ ...
+ [-0.685182   -0.3613528   0.15742022 ...  0.07644442  0.11970881
+   0.6063018 ]
+ [-0.81549597 -0.54806036  0.30897295 ... -0.06360055  0.11707676
+   0.512572  ]
+ [-0.64159787 -0.23028558  0.24433337 ... -0.15225971  0.32948843
+   0.4225831 ]]
+
+Created TF-IDF vectors with shape: (20130, 1000)
+  (0, 620)      0.11185182617075978
+  (0, 857)      0.10197894926865335
+  (0, 453)      0.6102839578528649
+  (0, 133)      0.09683281848329331
+  (0, 126)      0.11724450270041283
+  (0, 907)      0.18202482813419094
+  (0, 729)      0.03312323435224989
+  (0, 500)      0.04869319776978381
+  (0, 733)      0.053900185556634304
+  (0, 100)      0.05402150285047
+  (0, 83)       0.05412306086754615
+  (0, 677)      0.06734524551930529
+  (0, 388)      0.036022479294293024
+  (0, 474)      0.07296690325397776
+  (0, 783)      0.055500275507744674
+  (0, 890)      0.057207430203032116
+  (0, 516)      0.029758646168758635
+  (0, 239)      0.13468085698395277
+  (0, 67)       0.10849904866259841
+  (0, 270)      0.06938125267389296
+  (0, 4)        0.03428673807101205
+  (0, 962)      0.04702531035515014
+  (0, 539)      0.10659565038707988
+  (0, 687)      0.05342082773420476
+  (0, 246)      0.0756632551378832
+  :     :
+  (20129, 558)  0.15366321950049242
+  (20129, 638)  0.032147086654263274
+  (20129, 48)   0.029147171314353893
+  (20129, 79)   0.03532979268043154
+  (20129, 761)  0.03420600590443411
+  (20129, 378)  0.03759211044499702
+  (20129, 471)  0.049053176474373614
+  (20129, 382)  0.8473382104836702
+  (20129, 870)  0.029445660288407154
+  (20129, 495)  0.04463027164755368
+  (20129, 402)  0.0381039795634806
+  (20129, 706)  0.09118608997444305
+  (20129, 401)  0.03628677995558269
+  (20129, 226)  0.0372983702907977
+  (20129, 425)  0.04604640970136254
+  (20129, 903)  0.054344975491800306
+  (20129, 708)  0.21602308110873483
+  (20129, 290)  0.06330479573121006
+  (20129, 694)  0.05729691875231473
+  (20129, 632)  0.051799182206834965
+  (20129, 108)  0.12475126026718124
+  (20129, 646)  0.04789628634139475
+  (20129, 55)   0.06510454996558862
+  (20129, 771)  0.05584676023910743
+  (20129, 400)  0.07439796269765332
+
+Created Word2Vec vectors with shape: (20130, 100)
+[[ 0.15924524  0.17442191  0.11793493 ... -0.11144631 -0.09167678
+   0.25740668]
+ [ 0.24745187  0.21274126 -0.30432856 ...  0.12303893 -0.30478427
+   0.41242185]
+ [ 0.51783198 -0.32121542 -0.24820468 ...  0.69286519 -0.43557197
+   0.29646516]
+ ...
+ ...
+ [ 0.53469831  0.23601498 -0.00607852 ...  0.06764124 -0.30113712
+   0.57072723]
+ [ 0.55663151  0.06854106 -0.08456682 ...  0.29169816 -0.07428653
+   0.19104712]
+ [ 0.22923885  0.18373926 -0.14246835 ...  0.09572928  0.28754145
+   0.68150872]]
+
+5. Neural Networks and Random Forest
+Scaled features shape: (20130, 768)
+
+=== Cross-validation Evaluation ===
+
+Fold 1/5
+Fold 1 R² scores:
+Neural Network: 0.1345
+Linear Regression: 0.1030
+Random Forest: 0.1944
+
+Fold 2/5
+Fold 2 R² scores:
+Neural Network: 0.1454
+Linear Regression: 0.1281
+Random Forest: 0.2183

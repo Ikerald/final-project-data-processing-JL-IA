@@ -12,7 +12,7 @@ def get_cuda():
     """Gets the available device
 
     Returns:
-        device: Device used
+        torch.device: Device used by the script
     """
     if torch.cuda.is_available():
         device = torch.device("cuda")

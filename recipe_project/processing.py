@@ -5,12 +5,15 @@ Authors: Iker Aldasoro
 Date: 16/12/2024
 """
 
-import re
-import pandas as pd
+# processing.py
 
 from nltk import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
+
+import re
+
+import pandas as pd
 
 
 def preprocessing(df):
@@ -40,14 +43,14 @@ def preprocessing(df):
     return df
 
 
-def NTLK_clean(text):
+def NTLK_clean(text: str):
     """NLT pipeline using NTLK
 
     Args:
-        text (category): Category of the dataset to apply the NLP
+        text (str): Category of the dataset to apply the NLP.
 
     Returns:
-        _type_: Tokenized word
+        str: Tokenized set of words.
     """
     stop_words = set(stopwords.words("english"))
     if not isinstance(text, str):

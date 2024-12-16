@@ -5,13 +5,15 @@ Authors: Iker Aldasoro
 Date: 16/12/2024
 """
 
+# visualization.py
+
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
 
 
-def visualize(df):
-    """Visualizes the obtained graphs
+def visualize(df: pd.core.frame.DataFrame):
+    """Generates the graphs for the analysis of input variables
 
     Args:
         df (pandas df): Dataframe to examine

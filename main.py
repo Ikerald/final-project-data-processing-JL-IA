@@ -5,8 +5,11 @@ Authors: Iker Aldasoro
 Date: 16/12/2024
 """
 
+# main.py
+
 import nltk
 import pandas as pd
+import numpy as np
 
 import recipe_project
 import recipe_project.auxiliar
@@ -16,6 +19,7 @@ import recipe_project.visualization
 
 
 def main():
+    """Main function of the proyect. Handles order execution of the package."""
     # Download required NLTK data
     nltk.download("punkt")
     nltk.download("stopwords")
@@ -56,6 +60,8 @@ def main():
     vectors_bert = recipe_project.vectorization.bert_vectorization(device, df)
     vectors_TF = recipe_project.vectorization.TF_vectorization(df)
     vectors_W2V = recipe_project.vectorization.Word2Vec_vectorization(df)
+    # To reduce computational power
+    vectors_TF = vectors_TF.astype(np.float32)
 
     print("")
     print("5. Neural Networks and Random Forest")
