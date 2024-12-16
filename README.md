@@ -47,9 +47,18 @@ At first the phrases are divided into tokens (words). Then starts the homogeneiz
 After the text preprocessing, so the machine learning models can work with the information in text variables, these variables are transformed into word vectors. This means, they will have a numerical representation where their value is related to the meaning they have.
 For this type of transformation we are asked to use three different methods:
 
-- TF-IDF:
-- Word2Vec:
-- BERT:
+- TF-IDF: Gives a high value for a given term in a given document if that terms occurs often in that particular document and very rarely anywhere else. I just focuses on word importance, doesn't take into account the context. The size of the results obtained from this method is (20130, 1000), since we stablished a maximum of 1000 features.
+  
+- Word2Vec: It has a shallow word relationship, but lacks full contextual understanding. The size of the results is (20130, 100), since we stablished a maximum of 100 features for the vectorization. Along this parameters we used a window of 5 to create the mean vector.
+  
+- BERT: We were free to choose a transform-based model, so we chose BERT. It is context-aware and provides deep contextual embedings. The result size is (20130, 768), since 768 is the maximum size of the hidden layer, which is the length of the output embeddings.
+
+**4. Training and Evaluation of Regression Models**
+
+
+
+
+
 
 
 
