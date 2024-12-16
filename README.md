@@ -237,11 +237,6 @@ python main.py
 7. ✓ Results analysis and visualization
    
 
-# Recipe Rating Prediction Project - Technical Documentation
-
-## Technical Overview
-This project implements a machine learning pipeline to predict recipe ratings using a combination of NLP techniques and regression models. The system processes recipe data from epicurious.com, which includes textual descriptions, ingredients, and nutritional information.
-
 ## Detailed Code Structure Analysis
 
 ### 1. Data Pipeline (`main.py`)
