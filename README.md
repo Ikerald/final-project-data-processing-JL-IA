@@ -92,7 +92,7 @@ recipe_project/
 ├── processing.py
 ├── vectorization.py
 ├── visualization.py
-└── main.py
+main.py
 ```
 
 ## Features
